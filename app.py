@@ -6,8 +6,8 @@ import os
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi(os.getenv['CHANNEL_ACCESS_TOKEN'], None)
-handler = WebhookHandler(os.getenv['CHANNEL_SECRET'], None)
+line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN'], None)
+handler = WebhookHandler(os.environ['CHANNEL_SECRET'], None)
 
 if line_bot_api is None:
     print("Specify LINE_CHANNEL_SECRET as environment variable.")
