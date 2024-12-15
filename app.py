@@ -22,36 +22,14 @@ def callback():
         abort(400)
     return 'OK'
 
-##@handler.add(MessageEvent, message=TextMessage)
-##def handle_message(event):
-##    message1 = event.message.text
-##    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=message1))
-
 @handler.add(MessageEvent, message=TextMessage)
-def handle_text_message(event):
-
-    # 當 LINE 後台發送測試訊號過來時，會使用一組假 token，無視它就好
-    if event.reply_token == '0' * 32:
-        return
-
-    # 暫停 1.5 秒，假裝在打字或讀訊息
-    time.sleep(1.5)
-
-    # 隨機回覆一串敷衍訊息
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(
-            random.choice([
-                '好',
-                'ok',
-                '恩～',
-                '我知道了',
-            ])
-        )
-    )
+def handle_message(event):
+    message1 = event.message.text
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=message1))
 
 
-import os
+
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
