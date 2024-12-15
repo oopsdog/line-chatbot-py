@@ -6,18 +6,9 @@ import os
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN'])
-handler = WebhookHandler(os.environ['CHANNEL_SECRET'])
+line_bot_api = LineBotApi(os.getenv['CHANNEL_ACCESS_TOKEN'], None)
+handler = WebhookHandler(os.getenv['CHANNEL_SECRET'], None)
 parser = WebhookParser(os.environ['CHANNEL_SECRET'])
-
-if line_bot_api is None:
-    print("Specify LINE_CHANNEL_SECRET as environment variable.")
-    sys.exit(1)
-if handler is None:
-    print("Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.")
-    sys.exit(1)
-
-## fewfew
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -39,4 +30,3 @@ import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-    logger.info("app started")
