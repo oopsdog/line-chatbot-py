@@ -6,8 +6,9 @@ import os
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN'], None)
-handler = WebhookHandler(os.environ['CHANNEL_SECRET'], None)
+line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN'])
+handler = WebhookHandler(os.environ['CHANNEL_SECRET'])
+parser = WebhookParser(os.environ['CHANNEL_SECRET'])
 
 if line_bot_api is None:
     print("Specify LINE_CHANNEL_SECRET as environment variable.")
@@ -31,7 +32,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
+    message = event.message.text
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text='whats up B'))
 
 import os
