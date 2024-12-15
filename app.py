@@ -38,7 +38,7 @@ def handle_text_message(event):
     time.sleep(1.5)
 
     # 隨機回覆一串敷衍訊息
-    linebot_client.reply_message(
+    line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(
             random.choice([
