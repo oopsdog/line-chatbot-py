@@ -42,14 +42,7 @@ def handle_message(event):
         api_key=opai_sect,
     )
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text='1-ok'))
-        response = client.chat.completions.create(
-        messages=[{
-            "role": "user",
-            "content": ai_msg,
-        }],
-        model="gpt-4o-mini",
-        #model="gpt-3.5-turbo",   
-    )
+
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text='2-ok'))
 
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
