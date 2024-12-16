@@ -35,6 +35,7 @@ def callback():
 def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
     reply_msg = ''
         if len(ai_msg) >3 :
             client = OpenAI(
