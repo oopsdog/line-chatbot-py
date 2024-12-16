@@ -40,16 +40,7 @@ def handle_message(event):
         project=opai_proj,
         api_key=opai_sect,
     )
-            # 將第六個字元之後的訊息發送給 OpenAI
-    response = client.chat.completions.create(
-        messages=[{
-            "role": "user",
-            "content": ai_msg,
-        }],
-        model="gpt-4o-mini",
-        #model="gpt-3.5-turbo",   
-    )
-            reply_msg = response.choices[0].message.content
+
 
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
 
