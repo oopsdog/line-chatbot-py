@@ -36,11 +36,11 @@ def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
     reply_msg = ''
-#    client = OpenAI(
-#        organization=opai_org,
-#        project=opai_proj,
-#        api_key=opai_sect,
-#    )
+    client = OpenAI(
+        organization=opai_org,
+        project=opai_proj,
+        api_key=opai_sect,
+    )
     reply_msg = reply_msg + '___' + opai_org + '___' + opai_proj + '___' + opai_sect
 
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
