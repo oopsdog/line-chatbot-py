@@ -1,0 +1,4 @@
+condition,flag,water depth
+pre-disaster,green,0
+during-disaster,red,40
+post-disaster,yellow,3

@@ -36,6 +36,7 @@ def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
     reply_msg = ''
+    if ai_msg == '24hr'
     client = OpenAI(
         organization=opai_org,
         project=opai_proj,
