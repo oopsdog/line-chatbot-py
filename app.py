@@ -57,8 +57,8 @@ def handle_message(event):
         )
         reply_msg = response.choices[0].message.content
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
-    else if ai_msg.startswith(''):
-        reply_msg = 'pic path'
+    else if ai_msg.startswith('flood here'):
+        reply_msg = 'https://github.com/oopsdog/line-chatbot-py/blob/main/flood_contour_map.png'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
