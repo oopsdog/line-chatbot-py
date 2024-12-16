@@ -28,7 +28,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message1 = event.message.text
-    ai_msg = message1[:6].lower()
+    ai_msg = message1
         reply_msg = ''
         if ai_msg == 'hi ai:':
             openai.api_key = os.environ.get('OPEN_AI_SECRET')
