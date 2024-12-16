@@ -40,7 +40,7 @@ def handle_message(event):
     #    qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
         qmsg = 'Read the conditions time(before)=floodmark(no flooding), time(now)=floodmark(30cm flooding),time(after)=floodmark(slight flooding)\n'
         qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
-        qmsg = qmsg + 'Generate the flood warning and reminder according to the table\n'
+        qmsg = qmsg + 'Generate the flood warning for now and later and reminder according to the table in 20 lines.\n'
 
         client = OpenAI(
             organization=opai_org,
@@ -56,6 +56,9 @@ def handle_message(event):
             #model="gpt-3.5-turbo",   
         )
         reply_msg = response.choices[0].message.content
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+    else if ai_msg.startswith(''):
+        reply_msg = 'pic path'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
