@@ -1,4 +1,4 @@
 condition,flag,water depth
-pre-disaster,green,0
-during-disaster,red,40
-post-disaster,yellow,3
+pre-rain-event,green,0
+during-rain-event,red,40
+post-rain-event,yellow,3
