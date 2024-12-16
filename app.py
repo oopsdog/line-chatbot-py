@@ -35,26 +35,7 @@ def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
-    reply_msg = ''
-        if len(ai_msg) >5 :
-            client = OpenAI(
-                organization=opai_org,
-                project=opai_proj,
-                api_key=opai_sect
-                )
-            # 將第六個字元之後的訊息發送給 OpenAI
-            response = client.chat.completions.create(
-                messages=[{
-                    "role": "user",
-                    "content": ai_msg,
-                }],
-                model="gpt-4o-mini",
-                #model="gpt-3.5-turbo",   
-            )
-            reply_msg = response.choices[0].message.content
-        else:
-            reply_msg = message1
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+
 
 
 
