@@ -6,7 +6,6 @@ from linebot.models import TextMessage, TextSendMessage
 import os
 #import json
 from openai import OpenAI
-import openai
 
 app = Flask(__name__)
 
@@ -37,7 +36,7 @@ def handle_message(event):
     ai_msg = message1
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
     reply_msg = ''
-        if len(ai_msg) >3 :
+        if len(ai_msg) >5 :
             client = OpenAI(
                 organization=opai_org,
                 project=opai_proj,
