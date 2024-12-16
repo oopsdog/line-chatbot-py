@@ -36,23 +36,30 @@ def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
     reply_msg = ''
-    if ai_msg == '24hr'
-    client = OpenAI(
-        organization=opai_org,
-        project=opai_proj,
-        api_key=opai_sect,
-    )
-    response = client.chat.completions.create(
-        messages=[{
-            "role": "user",
-            "content": ai_msg,
-        }],
-        model="gpt-4o-mini",
-        #model="gpt-3.5-turbo",   
-    )
-    reply_msg = response.choices[0].message.content
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+    if ai_msg == '24hr':
+        qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
+        qmsg = qmsg + 'the column 1 is the time different comparing now. the column 2 is the water depth in cm.\n'
+        qmsg = qmsg + 'if the flood water depth is greater than 30, then it is a red flag, please reply the warning to the receiver.\n'
+        qmsg = qmsg + 'if the flood water depth is greater than 3 and not greater than 30, then it is a yellow flag. please remind the receiver about the remaining water.\n'
+        qmsg = qmsg + 'if the flood water depth is not greater than 3 then it is a green flag. please tell the receiver it is safe.\n'
 
+        client = OpenAI(
+            organization=opai_org,
+            project=opai_proj,
+            api_key=opai_sect,
+        )
+        response = client.chat.completions.create(
+            messages=[{
+                "role": "user",
+                "content": qmsg,
+            }],
+            model="gpt-4o-mini",
+            #model="gpt-3.5-turbo",   
+        )
+        reply_msg = response.choices[0].message.content
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
 
 
 
