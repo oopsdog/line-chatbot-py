@@ -37,8 +37,9 @@ def handle_message(event):
     ai_msg = message1
     reply_msg = ''
     if ai_msg.startswith('24hr'):
-        qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
-        qmsg = qmsg + 'The column 1 of the table is the time 6 hr before now, now, and 6 hr after now.\n'
+    #    qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
+        qmsg = 'Read the conditions time(before)=floodmark(no flooding), time(now)=floodmark(30cm flooding),time(after)=floodmark(slight flooding)\n'
+        qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
         qmsg = qmsg + 'Generate the flood warning and reminder according to the table\n'
 
         client = OpenAI(
