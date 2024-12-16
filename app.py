@@ -38,7 +38,7 @@ def handle_message(event):
     client = OpenAI(
         organization=opai_org,
         project=opai_proj,
-        api_key=opai_sect
+        api_key=opai_sect,
     )
             # 將第六個字元之後的訊息發送給 OpenAI
     response = client.chat.completions.create(
