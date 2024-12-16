@@ -49,7 +49,7 @@ def handle_message(event):
         #model="gpt-4o-mini",
         model="gpt-3.5-turbo",   
     )
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
 
 
 
