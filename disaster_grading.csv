@@ -1,4 +1,0 @@
-condition,flag,water depth
-pre-rain-event,green,0
-during-rain-event,red,40
-post-rain-event,yellow,3
