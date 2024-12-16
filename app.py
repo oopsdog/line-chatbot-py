@@ -38,10 +38,8 @@ def handle_message(event):
     reply_msg = ''
     if ai_msg.startswith('24hr'):
         qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
-        qmsg = qmsg + 'the column 1 is the time different comparing now. the column 2 is the water depth in cm.\n'
-        qmsg = qmsg + 'if the flood water depth is greater than 30, then it is a red flag, please reply the warning to the receiver.\n'
-        qmsg = qmsg + 'if the flood water depth is greater than 3 and not greater than 30, then it is a yellow flag. please remind the receiver about the remaining water.\n'
-        qmsg = qmsg + 'if the flood water depth is not greater than 3 then it is a green flag. please tell the receiver it is safe.\n'
+        qmsg = qmsg + 'The column 1 of the table is the time 6 hr before now, now, and 6 hr after now.\n'
+        qmsg = qmsg + 'Generate the flood warning and reminder according to the table\n'
 
         client = OpenAI(
             organization=opai_org,
