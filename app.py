@@ -36,7 +36,7 @@ def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
     reply_msg = ''
-    if ai_msg == '24hr':
+    if ai_msg.startswith('24hr'):
         qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
         qmsg = qmsg + 'the column 1 is the time different comparing now. the column 2 is the water depth in cm.\n'
         qmsg = qmsg + 'if the flood water depth is greater than 30, then it is a red flag, please reply the warning to the receiver.\n'
