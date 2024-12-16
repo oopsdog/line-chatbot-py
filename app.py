@@ -41,6 +41,15 @@ def handle_message(event):
         project=opai_proj,
         api_key=opai_sect,
     )
+        response = client.chat.completions.create(
+        messages=[{
+            "role": "user",
+            "content": ai_msg,
+        }],
+        model="gpt-4o-mini",
+        #model="gpt-3.5-turbo",   
+    )
+
     reply_msg = reply_msg + '___' + opai_org + '___' + opai_proj + '___' + opai_sect
 
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
