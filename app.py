@@ -12,8 +12,8 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ.get('CHANNEL_ACCESS_TOKEN'))
 handler = WebhookHandler(os.environ.get('CHANNEL_SECRET'))
 opai_sect = os.environ.get('OPEN_AI_SECRET')
-opai_org = os.environ.get('OPEN_AI_PROJECT')
-opai_proj = os.environ.get('OPEN_AI_ORG')
+opai_proj = os.environ.get('OPEN_AI_PROJECT')
+opai_org = os.environ.get('OPEN_AI_ORG')
 
 
 ##openai.api_key = os.environ.get('OPEN_AI_SECRET')
