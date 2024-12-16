@@ -46,7 +46,7 @@ def handle_message(event):
             "role": "user",
             "content": ai_msg,
         }],
-        model="gpt-4o-mini",
+        model="gpt-4o",
         #model="gpt-3.5-turbo",   
     )
     reply_msg = response.choices[0].message.content
