@@ -29,7 +29,7 @@ def callback():
 def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
-        reply_msg = ''
+    reply_msg = ''
         if ai_msg == 'hi ai:':
             openai.api_key = os.environ.get('OPEN_AI_SECRET')
             # 將第六個字元之後的訊息發送給 OpenAI
