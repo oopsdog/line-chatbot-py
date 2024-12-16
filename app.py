@@ -11,6 +11,11 @@ app = Flask(__name__)
 
 line_bot_api = LineBotApi(os.environ.get('CHANNEL_ACCESS_TOKEN'))
 handler = WebhookHandler(os.environ.get('CHANNEL_SECRET'))
+opai_sect = os.environ.get('OPEN_AI_SECRET')
+opai_org = os.environ.get('OPEN_AI_PROJECT')
+opai_proj = os.environ.get('OPEN_AI_ORG')
+
+
 ##openai.api_key = os.environ.get('OPEN_AI_SECRET')
 ##parser = WebhookParser(os.environ['CHANNEL_SECRET'])
 
@@ -30,17 +35,22 @@ def handle_message(event):
     message1 = event.message.text
     ai_msg = message1
     reply_msg = ''
-        if ai_msg == 'hi ai:':
-            openai.api_key = os.environ.get('OPEN_AI_SECRET')
-            # 將第六個字元之後的訊息發送給 OpenAI
-            response = openai.Completion.create(
-                model='text-davinci-003',
-                prompt=msg[6:],
-                max_tokens=256,
-                temperature=0.5,
+        if len(ai_msg) >3 :
+            client = OpenAI(
+                organization=opai_org,
+                project=opai_proj,
+                api_key=opai_sect
                 )
-            # 接收到回覆訊息後，移除換行符號
-            reply_msg = response["choices"][0]["text"].replace('\n','')
+            # 將第六個字元之後的訊息發送給 OpenAI
+            response = client.chat.completions.create(
+                messages=[{
+                    "role": "user",
+                    "content": ai_msg,
+                }],
+                model="gpt-4o-mini",
+                #model="gpt-3.5-turbo",   
+            )
+            reply_msg = response.choices[0].message.content
         else:
             reply_msg = message1
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
