@@ -5,6 +5,7 @@ from linebot.models import MessageEvent
 from linebot.models import TextMessage, TextSendMessage
 import os
 import json
+import openai import OpenAI
 import openai
 
 app = Flask(__name__)
