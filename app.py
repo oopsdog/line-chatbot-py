@@ -88,17 +88,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
 
 
-def push_message():
-    try:
-        # Define the message
-        message = TextSendMessage(text="This is an auto-pushed message from your LINE Bot!")
-
-        # Send the message to the specified user
-        line_bot_api.push_message(USER_ID, message)
-        print("Message sent successfully!")
-    except Exception as e:
-        print(f"Error: {e}")
-
+#
 # Schedule the message to run automatically
 # schedule.every(10).seconds.do(push_message)  # Auto-push every 10 seconds for demonstration
 
