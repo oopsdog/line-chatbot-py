@@ -58,7 +58,20 @@ def handle_message(event):
         reply_msg = response.choices[0].message.content
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
     elif ai_msg.startswith('Hi'):
-        reply_msg = ai_msg
+        client = OpenAI(
+            organization=opai_org,
+            project=opai_proj,
+            api_key=opai_sect,
+        )
+        response = client.chat.completions.create(
+            messages=[{
+                "role": "user",
+                "content": ai_msg,
+            }],
+            model="gpt-4o",
+            #model="gpt-3.5-turbo",   
+        )
+        reply_msg = response.choices[0].message.content
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
     elif ai_msg.startswith('flood here'):
         reply_msg = 'https://github.com/oopsdog/line-chatbot-py/blob/main/flood_contour_map.png'
