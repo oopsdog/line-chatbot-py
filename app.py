@@ -76,6 +76,12 @@ def handle_message(event):
     elif ai_msg.startswith('flood here'):
         reply_msg = 'https://github.com/oopsdog/line-chatbot-py/blob/main/flood_contour_map.png'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+    elif ai_msg.startswith('check'):
+        file_path = os.path.join(os.getcwd(), 'data', 'test.csv')
+        with open(file_path, 'r') as file:
+            content = file.read() 
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
+
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
 
