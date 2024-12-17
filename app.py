@@ -3,7 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent
 from linebot.models import TextMessage, TextSendMessage
-import schedule
+#import schedule
 import os
 #import json
 from openai import OpenAI
