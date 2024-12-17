@@ -16,7 +16,7 @@ handler = WebhookHandler(os.environ.get('CHANNEL_SECRET'))
 opai_sect = os.environ.get('OPEN_AI_SECRET')
 opai_proj = os.environ.get('OPEN_AI_PROJECT')
 opai_org = os.environ.get('OPEN_AI_ORG')
-user_id = line_bot_api.get_profile('<user_id>')
+#user_id = line_bot_api.get_profile('<user_id>')
 
 
 ##openai.api_key = os.environ.get('OPEN_AI_SECRET')
@@ -40,8 +40,8 @@ def handle_message(event):
     reply_msg = ''
     if ai_msg.startswith('24hr'):
     #    qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
-        qmsg = user_id
-        qmsg = qmsg + ' <-- USER ID. Read the conditions time(before)=floodmark(no flooding), time(now)=floodmark(30cm flooding),time(after)=floodmark(slight flooding)\n'
+        #qmsg = user_id
+        qmsg = 'Read the conditions time(before)=floodmark(no flooding), time(now)=floodmark(30cm flooding),time(after)=floodmark(slight flooding)\n'
         qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
         qmsg = qmsg + 'Generate the flood warning for now and later and reminder not more than 20 lines.\n'
 
