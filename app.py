@@ -3,6 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent
 from linebot.models import TextMessage, TextSendMessage
+import schedule
 import os
 #import json
 from openai import OpenAI
@@ -15,6 +16,7 @@ handler = WebhookHandler(os.environ.get('CHANNEL_SECRET'))
 opai_sect = os.environ.get('OPEN_AI_SECRET')
 opai_proj = os.environ.get('OPEN_AI_PROJECT')
 opai_org = os.environ.get('OPEN_AI_ORG')
+user_id = line_bot_api.get_profile('<user_id>')
 
 
 ##openai.api_key = os.environ.get('OPEN_AI_SECRET')
@@ -38,7 +40,8 @@ def handle_message(event):
     reply_msg = ''
     if ai_msg.startswith('24hr'):
     #    qmsg = 'Read the link https://github.com/oopsdog/line-chatbot-py/blob/main/flood_grading_by_time.csv\n'
-        qmsg = 'Read the conditions time(before)=floodmark(no flooding), time(now)=floodmark(30cm flooding),time(after)=floodmark(slight flooding)\n'
+        qmsg = user_id
+        qmsg = qmsg + ' <-- USER ID. Read the conditions time(before)=floodmark(no flooding), time(now)=floodmark(30cm flooding),time(after)=floodmark(slight flooding)\n'
         qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
         qmsg = qmsg + 'Generate the flood warning for now and later and reminder not more than 20 lines.\n'
 
@@ -79,13 +82,25 @@ def handle_message(event):
     elif ai_msg.startswith('check'):
         file_path = os.path.join(os.getcwd(), '.', 'test.txt')
         with open(file_path, 'r') as file:
-            content = file.read() 
+            content = file.read()
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=content))
-
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=ai_msg))
 
 
+def push_message():
+    try:
+        # Define the message
+        message = TextSendMessage(text="This is an auto-pushed message from your LINE Bot!")
+
+        # Send the message to the specified user
+        line_bot_api.push_message(USER_ID, message)
+        print("Message sent successfully!")
+    except Exception as e:
+        print(f"Error: {e}")
+
+# Schedule the message to run automatically
+# schedule.every(10).seconds.do(push_message)  # Auto-push every 10 seconds for demonstration
 
 
 if __name__ == "__main__":
