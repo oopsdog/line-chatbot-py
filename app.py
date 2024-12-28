@@ -70,7 +70,7 @@ def handle_message(event):
         aft = match.group(0)[6]
 
         if bef == 'R':
-            bef_fd = random.randint(30, 75) 
+            bef_fd = random.randint(30, 55) 
             bef_msg = 'time(before) = ' + str(bef_fd) + 'cm (serious flooding)'
         elif bef == 'Y':
             bef_fd = random.randint(1, 29) 
@@ -82,7 +82,7 @@ def handle_message(event):
             bef_msg = 'time(before) = 0cm (no flooding)'
 
         if now == 'R':
-            now_fd = random.randint(30, 75) 
+            now_fd = random.randint(30, 55) 
             now_msg = 'time(now) = ' + str(now_fd) + 'cm (serious flooding)'
         elif now == 'Y':
             now_fd = random.randint(1, 29) 
@@ -94,7 +94,7 @@ def handle_message(event):
             now_msg = 'time(now) = 0cm (no flooding)'
 
         if aft == 'R':
-            aft_fd = random.randint(30, 75) 
+            aft_fd = random.randint(30, 55) 
             aft_msg = 'time(after) = ' + str(aft_fd) + 'cm (serious flooding)'
         elif aft == 'Y':
             aft_fd = random.randint(1, 29) 
@@ -107,7 +107,9 @@ def handle_message(event):
 
         qmsg = 'Read the conditions '+ bef_msg + ' ' + now_msg + ' ' + aft_msg + '\n'
         qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
-        qmsg = qmsg + 'Generate the flood warning for now and later and reminder in 150 words.\n'
+        qmsg = qmsg + 'Generate the flood warning regarding to the status before, now and later.\n'
+        qmsg = qmsg + 'Give the receiver some instrutions to do for now and later.\n'
+        qmsg = qmsg + 'The format of this warning is the topic date and time as the header, and the status, and then the instructions.\n'
 
         client = OpenAI(
             organization=opai_org,
