@@ -64,9 +64,9 @@ def handle_message(event):
 
     elif ai_msg.startswith('COND'):
         match = re.search(r"COND([A-Z]{3})", text)
-        bef = match.group(1)
-        now = match.group(2)
-        aft = match.group(3)
+        bef = match.group(0)
+        now = match.group(1)
+        aft = match.group(2)
         test_msg = bef + now + aft + " test test"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=test_msg))
     elif ai_msg.startswith('Hi'):
