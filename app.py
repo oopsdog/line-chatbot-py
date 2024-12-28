@@ -64,11 +64,11 @@ def handle_message(event):
 
     elif ai_msg.startswith('COND'):
         match = re.search(r"COND([A-Z]{3})", ai_msg)
-        bef = match.group(1)[0]
-        now = match.group(1)[1]
-        aft = match.group(1)[2]
-        test_msg = bef + now + aft + " test test"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=test_msg))
+#        bef = match.group(1)[0]
+#        now = match.group(1)[1]
+#        aft = match.group(1)[2]
+#        test_msg = bef + now + aft + " test test"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='okok'))
     elif ai_msg.startswith('Hi'):
         client = OpenAI(
             organization=opai_org,
