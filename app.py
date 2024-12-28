@@ -43,7 +43,7 @@ def handle_message(event):
         #qmsg = user_id
         qmsg = 'Read the conditions time(before)=floodmark(no flooding), time(now)=floodmark(30cm flooding),time(after)=floodmark(slight flooding)\n'
         qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
-        qmsg = qmsg + 'Generate the flood warning for now and later and reminder not more than 20 lines.\n'
+        qmsg = qmsg + 'Generate the flood warning for now and later and reminder in 200 words.\n'
 
         client = OpenAI(
             organization=opai_org,
