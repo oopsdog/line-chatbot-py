@@ -3,6 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent
 from linebot.models import TextMessage, TextSendMessage
+import re
 #import schedule
 import os
 #import json
@@ -60,6 +61,14 @@ def handle_message(event):
         )
         reply_msg = response.choices[0].message.content
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+
+    elif ai_msg.startswith('COND'):
+        match = re.search(r"COND([A-Z]{3})", text)
+        bef = match.group(1)
+        now = match.group(2)
+        aft = match.group(3)
+        test_msg = bef + now + aft + " test test"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=test_msg))
     elif ai_msg.startswith('Hi'):
         client = OpenAI(
             organization=opai_org,
