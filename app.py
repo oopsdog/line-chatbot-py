@@ -4,6 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent
 from linebot.models import TextMessage, TextSendMessage
 import re
+import random
 #import schedule
 import os
 #import json
@@ -64,11 +65,66 @@ def handle_message(event):
 
     elif ai_msg.startswith('COND'):
         match = re.search(r"COND([A-Z]{3})", ai_msg)
-        bef = match.group(0)[3]
-        now = match.group(0)[4]
-        aft = match.group(0)[5]
-        test_msg = bef + ' ' + now + ' ' + aft + " conditions"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=test_msg))
+        bef = match.group(0)[4]
+        now = match.group(0)[5]
+        aft = match.group(0)[6]
+
+        if bef == 'R':
+            bef_fd = random.randint(30, 75) 
+            bef_msg = 'time(before) = ' + str(bef_fd) + 'cm (serious flooding)'
+        elif bef == 'Y':
+            bef_fd = random.randint(1, 29) 
+            bef_msg = 'time(before) = ' + str(bef_fd) + 'cm (slight flooding)'
+        elif bef == 'G':
+            bef_fd = 0
+            bef_msg = 'time(before) = ' + str(bef_fd) + 'cm (no flooding)'
+        else:
+            bef_msg = 'time(before) = 0cm (no flooding)'
+
+        if now == 'R':
+            now_fd = random.randint(30, 75) 
+            now_msg = 'time(now) = ' + str(now_fd) + 'cm (serious flooding)'
+        elif now == 'Y':
+            now_fd = random.randint(1, 29) 
+            now_msg = 'time(now) = ' + str(now_fd) + 'cm (slight flooding)'
+        elif now == 'G':
+            now_fd = 0
+            now_msg = 'time(now) = ' + str(now_fd) + 'cm (no flooding)'
+        else:
+            now_msg = 'time(now) = 0cm (no flooding)'
+
+        if aft == 'R':
+            aft_fd = random.randint(30, 75) 
+            aft_msg = 'time(after) = ' + str(aft_fd) + 'cm (serious flooding)'
+        elif aft == 'Y':
+            aft_fd = random.randint(1, 29) 
+            aft_msg = 'time(after) = ' + str(aft_fd) + 'cm (slight flooding)'
+        elif aft == 'G':
+            aft_fd = 0
+            aft_msg = 'time(after) = ' + str(aft_fd) + 'cm (no flooding)'
+        else:
+            aft_msg = 'time(after) = 0cm (no flooding)'
+
+        qmsg = 'Read the conditions '+ bef_msg + ' ' + now_msg + ' ' + aft_msg + '\n'
+        qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
+        qmsg = qmsg + 'Generate the flood warning for now and later and reminder in 150 words.\n'
+
+        client = OpenAI(
+            organization=opai_org,
+            project=opai_proj,
+            api_key=opai_sect,
+        )
+        response = client.chat.completions.create(
+            messages=[{
+                "role": "user",
+                "content": qmsg,
+            }],
+            model="gpt-4o-mini",
+            #model="gpt-3.5-turbo",   
+        )
+        reply_msg = response.choices[0].message.content
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_msg))
+
     elif ai_msg.startswith('Hi'):
         client = OpenAI(
             organization=opai_org,
