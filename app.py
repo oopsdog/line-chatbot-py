@@ -109,7 +109,8 @@ def handle_message(event):
         qmsg = qmsg + 'The item 1 is the time 6 hr before now, now, and 6 hr after now. And the item2 is the flood condition.\n'
         qmsg = qmsg + 'Generate the flood warning regarding to the status before, now and later.\n'
         qmsg = qmsg + 'Give the receiver some instrutions to do for now and later.\n'
-        qmsg = qmsg + 'The format of this warning is the topic date and time as the header, and the status, and then the instructions.\n'
+        qmsg = qmsg + 'The format of this warning is the topic date and time as the header, and the status and the instructions.\n'
+        qmsg = qmsg + 'Complete the message in 150 words.\n'
 
         client = OpenAI(
             organization=opai_org,
