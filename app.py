@@ -3,6 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent
 from linebot.models import TextMessage, TextSendMessage
+from datetime import datetime
 import re
 import random
 #import schedule
@@ -68,7 +69,7 @@ def handle_message(event):
         bef = match.group(0)[4]
         now = match.group(0)[5]
         aft = match.group(0)[6]
-
+        nowtime = datetime.now()
         if bef == 'R':
             bef_fd = random.randint(30, 55) 
             bef_msg = 'time(before) = ' + str(bef_fd) + 'cm (serious flooding)'
@@ -110,6 +111,7 @@ def handle_message(event):
         qmsg = qmsg + 'Generate the flood warning regarding to the status before, now and later.\n'
         qmsg = qmsg + 'Give the receiver some instrutions to do for now and later.\n'
         qmsg = qmsg + 'The format of this warning is the topic date and time as the header, and the status and the instructions.\n'
+        qmsg = qmsg + 'the date and time is '+ str(nowtime) +' now\n'
         qmsg = qmsg + 'Complete the message in 150 words.\n'
 
         client = OpenAI(
